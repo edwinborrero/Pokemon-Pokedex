@@ -9,5 +9,8 @@ const PokemonModel = new Schema({
     },
     type: [{
         type: String
-    }]
+    }],
+    region: {
+        type: String
+    }
 })
