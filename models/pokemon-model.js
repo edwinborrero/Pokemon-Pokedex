@@ -2,7 +2,7 @@ import mongoose, {Schema} from "mongoose";
 
 const PokemonModel = new Schema({
     dexNumber: {
-        type: Number
+        type: String
     },
     name: {
         type: String
@@ -14,3 +14,5 @@ const PokemonModel = new Schema({
         type: String
     }
 })
+
+export default mongoose.model('Pokemon', PokemonModel);

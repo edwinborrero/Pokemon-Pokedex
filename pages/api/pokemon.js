@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import PokeModel from '../../models/pokemon-model';
+import dbConnect from '../../database/database';
 
+dbConnect();
 const routes = new Router();
 
 routes.get('/api/pokemon', async (req, res) => {
@@ -26,3 +28,20 @@ routes.get('/api/pokemon/:dexNumber', async (req, res) => {
         return res.status(404).json({ error: true, message: 'Not found Pokemon'});
     }
 });
+
+export default routes;
+
+
+/*
+export default async function handler(req, res) {
+
+    dbConnect();
+
+    try{
+        const pokemon = await PokeModel.find({})
+        res.status(200).json({ success: true, data: pokemon })
+    } catch (error) {
+        res.status(404).json({ success: false })
+    }
+}
+*/
