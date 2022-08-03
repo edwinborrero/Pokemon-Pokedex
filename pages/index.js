@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import dbConnect from '../database/database';
+import PokeModel from '../models/pokemon-model';
 
 export default function Home() {
   return (
@@ -66,4 +68,18 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  dbConnect();
+
+  /* find all the data in our database */
+  const result = await PokeModel.find({});
+  const pokemons = result.map((doc) => {
+    const pokemon = doc.toObject()
+    pokemon._id = pokemon._id.toString()
+    return pokemon
+  })
+
+  return { props: { pokemon: pokemons } }
 }
