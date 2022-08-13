@@ -2,5 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/allPokemon": "pages/api/allPokemon.js"
+  "/": "pages/index.js",
+  "/all/[pokemon]": "pages/all/[pokemon].js",
+  "/pokeRegion/[region]/[pokemon]": "pages/pokeRegion/[region]/[pokemon].js",
+  "/pokeRegion/[region]": "pages/pokeRegion/[region].js"
 }
