@@ -31,7 +31,7 @@ export async function getServerSideProps() {
   dbConnect();
 
   /* find all the data in our database */
-  const result = await PokeModel.find({});
+  const result = await PokeModel.find({}, 'name dexNumber');
   const pokemons = result.map((doc) => {
     const pokemon = doc.toObject()
     pokemon._id = pokemon._id.toString()

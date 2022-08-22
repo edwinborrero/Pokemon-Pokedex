@@ -29,7 +29,7 @@ export async function getServerSideProps(context) {
 
     const { region } = context.params;
   
-    const result = await PokeModel.find({ region: region});
+    const result = await PokeModel.find({ region: region}, 'name dexNumber');
     const pokemons = result.map((doc) => {
       const pokemon = doc.toObject()
       pokemon._id = pokemon._id.toString()

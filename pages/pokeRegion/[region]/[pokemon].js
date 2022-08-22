@@ -1,6 +1,5 @@
 import PokeModel from '../../../models/pokemon-model';
 import dbConnect from '../../../database/database';
-import { useRouter } from 'next/router';
 
 const Pokemon = ({ pokemon }) => {
 
@@ -13,7 +12,7 @@ const Pokemon = ({ pokemon }) => {
                         <h1>Region: {pokemons.region}</h1>
                         <h2>Name: {pokemons.name}</h2>
                         <h2>Dex Number: {pokemons.dexNumber}</h2>
-                        <h2>Type: {pokemons.type}</h2>
+                        <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
                     </div>
                 )
             })}

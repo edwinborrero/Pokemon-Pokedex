@@ -11,7 +11,7 @@ export default function AllPokemon({ pokemon }) {
             <div key={pokemons._id}>
               <h2>Name: {pokemons.name}</h2>
               <h2>Dex Number: {pokemons.dexNumber}</h2>
-              <h2>Type: {pokemons.type}</h2>
+              <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
               <h2>Region: {pokemons.region}</h2>
             </div>
           )
