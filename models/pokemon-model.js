@@ -10,6 +10,24 @@ const PokemonModel = new Schema({
     type: [{
         type: String
     }],
+    species: {
+        type: String
+    },
+    height: {
+        type: String
+    },
+    weight: {
+        type: String
+    },
+    abilities: [{
+        type: String
+    }],
+    form: {
+        type: String
+    },
+    other_forms: [{
+        type: String
+    }],
     region: {
         type: String
     }

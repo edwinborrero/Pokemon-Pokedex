@@ -13,6 +13,15 @@ const Pokemon = ({ pokemon }) => {
                         <h2>Name: {pokemons.name}</h2>
                         <h2>Dex Number: {pokemons.dexNumber}</h2>
                         <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
+                        <h2>Species: {pokemons.species}</h2>
+                        <h2>Height: {pokemons.height}</h2>
+                        <h2>Weight: {pokemons.weight}</h2>
+                        <h2>Abilities: </h2>
+                                <ul>
+                                    <li>{pokemons.abilities[0]}</li>
+                                    <li>{pokemons.abilities[1]}</li>
+                                    <li>{pokemons.abilities[2]}</li>
+                                </ul>
                     </div>
                 )
             })}

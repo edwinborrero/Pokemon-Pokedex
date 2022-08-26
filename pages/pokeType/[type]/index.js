@@ -29,7 +29,7 @@ export async function getServerSideProps(context) {
 
     const { type } = context.params;
   
-    const result = await PokeModel.find({ type: type }, 'name dexNumber');
+    const result = await PokeModel.find({ type: new RegExp(`^${type}$`, "i")}, 'name dexNumber');
     const pokemons = result.map((doc) => {
       const pokemon = doc.toObject()
       pokemon._id = pokemon._id.toString()
