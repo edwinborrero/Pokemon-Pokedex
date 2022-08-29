@@ -1,8 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/pokeType/[type]/[pokemon]": "pages/pokeType/[type]/[pokemon].js",
-  "/pokeType/[type]": "pages/pokeType/[type].js"
+  "/_document": "pages/_document.js"
 }
