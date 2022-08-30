@@ -1,23 +1,34 @@
 import Link from "next/link";
 import PokeModel from '../../../models/pokemon-model';
 import dbConnect from '../../../database/database';
+import { useRouter } from "next/router";
 
 const Region = ({ pokemon }) => {
+    const router = useRouter();
+    const xregion = router.query.region;
 
     return (
         <>
-            <h1>List of Pokemon</h1>
-            {pokemon.map((pokemons) => {
-                return (
-                    <div key={pokemons._id}>
-                        <h2>
-                            <Link href="/pokeRegion/[region]/[pokemon]" as={`/pokeRegion/${pokemons.region}/${pokemons.name}`}>
-                                <a>{pokemons.name}   {pokemons.dexNumber}</a>
-                            </Link>
-                        </h2>
+            <html>
+                <body>
+                    <h1>List of Pokemon in the <a className="p-router">{xregion}</a> region</h1>
+                    <div className="wrapper-pokemon">
+                        {pokemon.map((pokemons) => {
+                            return (
+                                <div key={pokemons._id}>
+                                    
+                                    <Link href="/pokeRegion/[region]/[pokemon]" as={`/pokeRegion/${xregion}/${pokemons.name}`}>
+                                        <div className='button-pokemon bar_color'>
+                                            <a className='a-pokemon-dnumber'>{pokemons.dexNumber}</a> <a className='a-pokemon-name'>{pokemons.name}</a>
+                                        </div>
+                                    </Link>
+                                    
+                                </div>
+                            )
+                        })}
                     </div>
-                )
-            })}
+                </body>
+            </html>
         </>
     );
 };
