@@ -9,18 +9,26 @@ const Type = ({ pokemon }) => {
 
     return (
         <>
-            <h1>List of <a className="p-router">{xtype} Type</a> Pokemon</h1>
-            {pokemon.map((pokemons) => {
-                return (
-                    <div key={pokemons._id}>
-                        <h2>
-                            <Link href="/pokeType/[type]/[pokemon]" as={`/pokeType/${xtype}/${pokemons.name}`}>
-                                <a>{pokemons.name}   {pokemons.dexNumber}</a>
-                            </Link>
-                        </h2>
-                    </div>
-                )
-            })}
+            <html>
+                <body>
+                <h1>List of <a className="p-router">{xtype} Type</a> Pokemon</h1>
+                <div className="wrapper-pokemon">
+                    {pokemon.map((pokemons) => {
+                        return (
+                            <div key={pokemons._id}>
+                                
+                                <Link href="/pokeType/[type]/[pokemon]" as={`/pokeType/${xtype}/${pokemons.name}`}>
+                                    <div className='button-pokemon bar_color'>
+                                        <a className='a-pokemon-dnumber'>{pokemons.dexNumber}</a> <a className='a-pokemon-name'>{pokemons.name}</a>
+                                    </div>
+                                </Link>
+                            
+                            </div>
+                        )
+                    })}
+                </div>
+                </body>
+            </html>
         </>
     );
 };
