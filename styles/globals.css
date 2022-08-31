@@ -222,6 +222,13 @@ a {
   cursor: pointer;
 }
 
+.button-pokemon img {
+  margin-left: 200px;
+  height: 140px;
+  width: 90px;
+  padding-bottom: 80px;
+}
+
 .bar_color {
   background-color: #19d4b5;
   box-shadow: 0 0 20px #19d4b5;

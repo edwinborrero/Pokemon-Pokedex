@@ -30,15 +30,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/pokeRegion/[region]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/pokeRegion/[region].js"
+    ],
     "/pokeType/[type]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/pokeType/[type].js"
-    ],
-    "/pokeType/[type]/[pokemon]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/pokeType/[type]/[pokemon].js"
     ]
   },
   "ampFirstPages": []

@@ -16,12 +16,26 @@ export default function Home({ pokemon }) {
         <h1>List of all the Pokemon</h1>
         <div className="wrapper-pokemon">
           {pokemon.map((pokemons) => {
+
+            /* In order to have all the sprites shown, 
+            first some case sensitive names must be changed to match the name of the image inside /public/images/sprites2d */
+            const firstRepl = pokemons.name.replace("♀", "-f");
+            const secRepl = firstRepl.replace("♂", "-m");
+            const thirdRepl = secRepl.replace("'", "");
+            const fourthRepl = thirdRepl.replace(".", "");
+            const fifthRepl = fourthRepl.replaceAll("é", "e"); 
+            const sixthRepl = fifthRepl.replace(":", "-");
+            const sevRepl = sixthRepl.replace(" ", "-");
+
+            const lower = sevRepl.toLowerCase();
+
             return (
                 <div key={pokemons._id}>
                   
                   <Link href={"/all/[pokemon]"} as={`/all/${pokemons.name}`}>
                       <div className='button-pokemon bar_color'>
                         <a className='a-pokemon-dnumber'>{pokemons.dexNumber}</a> <a className='a-pokemon-name'>{pokemons.name}</a>
+                        <img src={`/images/sprites2d/${lower}.png`}/>
                       </div>
                   </Link>
                   
