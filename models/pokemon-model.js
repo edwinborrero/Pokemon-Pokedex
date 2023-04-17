@@ -25,8 +25,9 @@ const PokemonModel = new Schema({
     form: {
         type: String
     },
-    other_forms: [{
-        type: String
+    otherForms: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Form',
     }],
     region: {
         type: String
