@@ -51,7 +51,7 @@ export default function Home({ pokemon }) {
 
 export async function getServerSideProps() {
   dbConnect();
-
+ 
   /* find all the data in our database */
   const result = await PokeModel.find({}, 'name dexNumber').sort({ dexNumber: 1 });
   const pokemons = result.map((doc) => {
