@@ -4,186 +4,199 @@ import dbConnect from '../../../database/database';
 
 export default function AllPokemon({ pokeApi, pokeDB }) {
 
+  let math_height = pokeApi.height / 10;
+  let math_weight = pokeApi.weight / 10;
+
     return (
       <>
         <h1>Pokemon Information:</h1>
         {pokeDB.map((pokemons) => {
 
-          return (
-            <div>
-              <h2>Name: {pokeApi.name}</h2>
-              <h2>Dex Number: {pokeApi.id}</h2>
-              <h2>Species: {pokemons.species}</h2>
-              <h2>Height: {pokeApi.height}</h2>
-              <h2>Weight: {pokeApi.weight}</h2>
-            </div>
-          )
-    //     //   if (pokemons.form != null) {
-            
-    //     //     // for (let i=0; i < pokemons.abilities.length; i++) {
-    //     //     //   const pokeAbilities = [];
-    //     //     //   pokeAbilities.push(pokemons.abilities[i]);
-    //     //     // }
+          if(pokeApi.types.length == 1) {
 
-    //     //     // let data = pokeAbilities;
-    //     //     // let list = document.getElementById("abilities_list");
-        
-    //     //     // data.forEach((item) => {
-    //     //     //     const li = document.createElement("li");
-    //     //     //     li.innerText = item;
-    //     //     //     list.appendChild(li);
-    //     //     // });
+            if(pokeApi.abilities.length == 1) {
 
-    //     //     // return (
-    //     //     //   <html>
-    //     //     //     <body>
-    //     //     //       <div key={pokemons._id}>
-    //     //     //         <h2>Name: {pokemons.name}</h2>
-    //     //     //         <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //     //         <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //     //         <h2>Species: {pokemons.species}</h2>
-    //     //     //         <h2>Height: {pokemons.height}</h2>
-    //     //     //         <h2>Weight: {pokemons.weight}</h2>
-    //     //     //         <h2>Abilities: </h2>
-    //     //     //             <ul id = "abilities_list"></ul>  
-    //     //     //         <h2>Region: {pokemons.region}</h2>
-    //     //     //         <h2>Form: {pokemons.form}</h2>
-    //     //     //       </div>
-    //     //     //     </body>
-    //     //     //   </html>
-    //     //     // )
-            
+              return (
+                <div key={pokemons._id}>
+                  <h2>Name: {pokemons.name}</h2>
+                  <h2>Dex Number: {pokemons.dexNumber}</h2>
+                  <h2>Species: {pokemons.species}</h2>
+                  <h2>Type: {pokeApi.types[0].type.name}</h2>
+                  <h2>Height: {math_height}m</h2>
+                  <h2>Weight: {math_weight}kg</h2>
+                  <h2>Abilities: </h2>
+                      <ul>
+                        <li>{pokeApi.abilities[0].ability.name}</li>
+                      </ul>
+                  <h2>Base Stats: </h2>
+                      <ul>
+                        <li>HP: {pokeApi.stats[0].base_stat}</li>
+                        <li>Attack: {pokeApi.stats[1].base_stat}</li>
+                        <li>Defense: {pokeApi.stats[2].base_stat}</li>
+                        <li>Sp. Attack: {pokeApi.stats[3].base_stat}</li>
+                        <li>Sp. Defense: {pokeApi.stats[4].base_stat}</li>
+                        <li>Speed: {pokeApi.stats[5].base_stat}</li>
+                      </ul>
+                  <h2>Official Artwork: </h2>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`}></img>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`}></img>
+                </div>
+              )
+  
+            } else if(pokeApi.abilities.length == 2) {
+  
+              return (
+                <div key={pokemons._id}>
+                  <h2>Name: {pokemons.name}</h2>
+                  <h2>Dex Number: {pokemons.dexNumber}</h2>
+                  <h2>Species: {pokemons.species}</h2>
+                  <h2>Type: {pokeApi.types[0].type.name}</h2>
+                  <h2>Height: {math_height}m</h2>
+                  <h2>Weight: {math_weight}kg</h2>
+                  <h2>Abilities: </h2>
+                      <ul>
+                        <li>{pokeApi.abilities[0].ability.name}</li>
+                        <li>{pokeApi.abilities[1].ability.name}</li>
+                      </ul>
+                  <h2>Base Stats: </h2>
+                      <ul>
+                        <li>HP: {pokeApi.stats[0].base_stat}</li>
+                        <li>Attack: {pokeApi.stats[1].base_stat}</li>
+                        <li>Defense: {pokeApi.stats[2].base_stat}</li>
+                        <li>Sp. Attack: {pokeApi.stats[3].base_stat}</li>
+                        <li>Sp. Defense: {pokeApi.stats[4].base_stat}</li>
+                        <li>Speed: {pokeApi.stats[5].base_stat}</li>
+                      </ul>
+                  <h2>Official Artwork: </h2>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`}></img>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`}></img>
+                </div>
+              )
+  
+            } else {
+  
+              return (
+                <div key={pokemons._id}>
+                  <h2>Name: {pokemons.name}</h2>
+                  <h2>Dex Number: {pokemons.dexNumber}</h2>
+                  <h2>Species: {pokemons.species}</h2>
+                  <h2>Type: {pokeApi.types[0].type.name}</h2>
+                  <h2>Height: {math_height}m</h2>
+                  <h2>Weight: {math_weight}kg</h2>
+                  <h2>Abilities: </h2>
+                      <ul>
+                        <li>{pokeApi.abilities[0].ability.name}</li>
+                        <li>{pokeApi.abilities[1].ability.name}</li>
+                        <li>{pokeApi.abilities[2].ability.name}</li>
+                      </ul>
+                  <h2>Base Stats: </h2>
+                      <ul>
+                        <li>HP: {pokeApi.stats[0].base_stat}</li>
+                        <li>Attack: {pokeApi.stats[1].base_stat}</li>
+                        <li>Defense: {pokeApi.stats[2].base_stat}</li>
+                        <li>Sp. Attack: {pokeApi.stats[3].base_stat}</li>
+                        <li>Sp. Defense: {pokeApi.stats[4].base_stat}</li>
+                        <li>Speed: {pokeApi.stats[5].base_stat}</li>
+                      </ul>
+                  <h2>Official Artwork: </h2>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`}></img>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`}></img>
+                </div>
+              )
+            }
+          } else {
 
-    //     //     if (pokemons.abilities.length == 1) {
-    //     //       return (
-    //     //         <div key={pokemons._id}>
-    //     //           <h2>Name: {pokemons.name}</h2>
-    //     //           <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //           <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //           <h2>Species: {pokemons.species}</h2>
-    //     //           <h2>Height: {pokemons.height}</h2>
-    //     //           <h2>Weight: {pokemons.weight}</h2>
-    //     //           <h2>Abilities: </h2>
-    //     //                   <ul>
-    //     //                         <li>{pokemons.abilities[0]}</li>
-    //     //                   </ul>
-    //     //           <h2>Region: {pokemons.region}</h2>
-    //     //           <h2>Form: {pokemons.form}</h2>
-    //     //         </div>
-    //     //       )
-    //     //     } else if (pokemons.abilities.length == 2) {
-    //     //       return (
-    //     //         <div key={pokemons._id}>
-    //     //           <h2>Name: {pokemons.name}</h2>
-    //     //           <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //           <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //           <h2>Species: {pokemons.species}</h2>
-    //     //           <h2>Height: {pokemons.height}</h2>
-    //     //           <h2>Weight: {pokemons.weight}</h2>
-    //     //           <h2>Abilities: </h2>
-    //     //                   <ul>
-    //     //                         <li>{pokemons.abilities[0]}</li>
-    //     //                         <li>{pokemons.abilities[1]}</li>
-    //     //                   </ul>
-    //     //           <h2>Region: {pokemons.region}</h2>
-    //     //           <h2>Form: {pokemons.form}</h2>
-    //     //           <h2>Other Forms: {pokemons.otherForms[0].form}</h2>
-    //     //         </div>
-    //     //       )
-    //     //     } else {
-    //     //       return (
-    //     //         <div key={pokemons._id}>
-    //     //           <h2>Name: {pokemons.name}</h2>
-    //     //           <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //           <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //           <h2>Species: {pokemons.species}</h2>
-    //     //           <h2>Height: {pokemons.height}</h2>
-    //     //           <h2>Weight: {pokemons.weight}</h2>
-    //     //           <h2>Abilities: </h2>
-    //     //                   <ul>
-    //     //                         <li>{pokemons.abilities[0]}</li>
-    //     //                         <li>{pokemons.abilities[1]}</li>
-    //     //                         <li>{pokemons.abilities[2]}</li>
-    //     //                   </ul>
-    //     //           <h2>Region: {pokemons.region}</h2>
-    //     //           <h2>Form: {pokemons.form}</h2>
-    //     //         </div>
-    //     //       )
-    //     //     }
+            if(pokeApi.abilities.length == 1) {
 
-    //     //   } else {
+              return (
+                <div key={pokemons._id}>
+                  <h2>Name: {pokemons.name}</h2>
+                  <h2>Dex Number: {pokemons.dexNumber}</h2>
+                  <h2>Species: {pokemons.species}</h2>
+                  <h2>Type: {pokeApi.types[0].type.name}  {pokeApi.types[1].type.name}</h2>
+                  <h2>Height: {math_height}m</h2>
+                  <h2>Weight: {math_weight}kg</h2>
+                  <h2>Abilities: </h2>
+                      <ul>
+                        <li>{pokeApi.abilities[0].ability.name}</li>
+                      </ul>
+                  <h2>Base Stats: </h2>
+                      <ul>
+                        <li>HP: {pokeApi.stats[0].base_stat}</li>
+                        <li>Attack: {pokeApi.stats[1].base_stat}</li>
+                        <li>Defense: {pokeApi.stats[2].base_stat}</li>
+                        <li>Sp. Attack: {pokeApi.stats[3].base_stat}</li>
+                        <li>Sp. Defense: {pokeApi.stats[4].base_stat}</li>
+                        <li>Speed: {pokeApi.stats[5].base_stat}</li>
+                      </ul>
+                  <h2>Official Artwork: </h2>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`}></img>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`}></img>
+                </div>
+              )
 
-    //     //     // for (let i=0; i < pokemons.abilities.length; i++) { 
-    //     //     //   return (
-    //     //     //     <div key={pokemons._id}>
-    //     //     //       <h2>Name: {pokemons.name}</h2>
-    //     //     //       <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //     //       <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //     //       <h2>Species: {pokemons.species}</h2>
-    //     //     //       <h2>Height: {pokemons.height}</h2>
-    //     //     //       <h2>Weight: {pokemons.weight}</h2>
-    //     //     //       <h2>Abilities: </h2>
-    //     //     //               <ul>
-    //     //     //                     <li>{pokemons.abilities[i]}</li>
-    //     //     //               </ul>
-    //     //     //       <h2>Region: {pokemons.region}</h2>
-    //     //     //     </div>
-    //     //     //   )
-    //     //     // }
+            } else if(pokeApi.abilities.length == 2) {
 
-    //     //     if (pokemons.abilities.length == 1) {
-    //     //       return (
-    //     //         <div key={pokemons._id}>
-    //     //           <h2>Name: {pokemons.name}</h2>
-    //     //           <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //           <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //           <h2>Species: {pokemons.species}</h2>
-    //     //           <h2>Height: {pokemons.height}</h2>
-    //     //           <h2>Weight: {pokemons.weight}</h2>
-    //     //           <h2>Abilities: </h2>
-    //     //                   <ul>
-    //     //                         <li>{pokemons.abilities[0]}</li>
-    //     //                   </ul>
-    //     //           <h2>Region: {pokemons.region}</h2>
-    //     //         </div>
-    //     //       )
-    //     //     } else if (pokemons.abilities.length == 2) {
-    //     //       return (
-    //     //         <div key={pokemons._id}>
-    //     //           <h2>Name: {pokemons.name}</h2>
-    //     //           <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //           <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //           <h2>Species: {pokemons.species}</h2>
-    //     //           <h2>Height: {pokemons.height}</h2>
-    //     //           <h2>Weight: {pokemons.weight}</h2>
-    //     //           <h2>Abilities: </h2>
-    //     //                   <ul>
-    //     //                         <li>{pokemons.abilities[0]}</li>
-    //     //                         <li>{pokemons.abilities[1]}</li>
-    //     //                   </ul>
-    //     //           <h2>Region: {pokemons.region}</h2>
-    //     //         </div>
-    //     //       )
-    //     //     } else {
-    //     //       return (
-    //     //         <div key={pokemons._id}>
-    //     //           <h2>Name: {pokemons.name}</h2>
-    //     //           <h2>Dex Number: {pokemons.dexNumber}</h2>
-    //     //           <h2>Type: {pokemons.type[0]}  {pokemons.type[1]}</h2>
-    //     //           <h2>Species: {pokemons.species}</h2>
-    //     //           <h2>Height: {pokemons.height}</h2>
-    //     //           <h2>Weight: {pokemons.weight}</h2>
-    //     //           <h2>Abilities: </h2>
-    //     //                   <ul>
-    //     //                         <li>{pokemons.abilities[0]}</li>
-    //     //                         <li>{pokemons.abilities[1]}</li>
-    //     //                         <li>{pokemons.abilities[2]}</li>
-    //     //                   </ul>
-    //     //           <h2>Region: {pokemons.region}</h2>
-    //     //         </div>
-    //     //       )
-    //     //     }
-    //     //   }
+              return (
+                <div key={pokemons._id}>
+                  <h2>Name: {pokemons.name}</h2>
+                  <h2>Dex Number: {pokemons.dexNumber}</h2>
+                  <h2>Species: {pokemons.species}</h2>
+                  <h2>Type: {pokeApi.types[0].type.name}  {pokeApi.types[1].type.name}</h2>
+                  <h2>Height: {math_height}m</h2>
+                  <h2>Weight: {math_weight}kg</h2>
+                  <h2>Abilities: </h2>
+                      <ul>
+                        <li>{pokeApi.abilities[0].ability.name}</li>
+                        <li>{pokeApi.abilities[1].ability.name}</li>
+                      </ul>
+                  <h2>Base Stats: </h2>
+                      <ul>
+                        <li>HP: {pokeApi.stats[0].base_stat}</li>
+                        <li>Attack: {pokeApi.stats[1].base_stat}</li>
+                        <li>Defense: {pokeApi.stats[2].base_stat}</li>
+                        <li>Sp. Attack: {pokeApi.stats[3].base_stat}</li>
+                        <li>Sp. Defense: {pokeApi.stats[4].base_stat}</li>
+                        <li>Speed: {pokeApi.stats[5].base_stat}</li>
+                      </ul>
+                  <h2>Official Artwork: </h2>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`}></img>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`}></img>
+                </div>
+              )
+
+            } else {
+
+              return (
+                <div key={pokemons._id}>
+                  <h2>Name: {pokemons.name}</h2>
+                  <h2>Dex Number: {pokemons.dexNumber}</h2>
+                  <h2>Species: {pokemons.species}</h2>
+                  <h2>Type: {pokeApi.types[0].type.name}  {pokeApi.types[1].type.name}</h2>
+                  <h2>Height: {math_height}m</h2>
+                  <h2>Weight: {math_weight}kg</h2>
+                  <h2>Abilities: </h2>
+                      <ul>
+                        <li>{pokeApi.abilities[0].ability.name}</li>
+                        <li>{pokeApi.abilities[1].ability.name}</li>
+                        <li>{pokeApi.abilities[2].ability.name}</li>
+                      </ul>
+                  <h2>Base Stats: </h2>
+                      <ul>
+                        <li>HP: {pokeApi.stats[0].base_stat}</li>
+                        <li>Attack: {pokeApi.stats[1].base_stat}</li>
+                        <li>Defense: {pokeApi.stats[2].base_stat}</li>
+                        <li>Sp. Attack: {pokeApi.stats[3].base_stat}</li>
+                        <li>Sp. Defense: {pokeApi.stats[4].base_stat}</li>
+                        <li>Speed: {pokeApi.stats[5].base_stat}</li>
+                      </ul>
+                  <h2>Official Artwork: </h2>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`}></img>
+                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`}></img>
+                </div>
+              )
+            }
+          }
         })}
       </>
     )
