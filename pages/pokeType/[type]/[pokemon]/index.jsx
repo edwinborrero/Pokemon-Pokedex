@@ -1,15 +1,11 @@
-import PokeModel from '../../../models/pokemon-model';
-import dbConnect from '../../../database/database';
-import { useRouter } from "next/router";
+import PokeModel from '../../../../models/pokemon-model';
+import dbConnect from '../../../../database/database';
 
 const Pokemon = ({ pokemon }) => {
-    const router = useRouter();
-    const xregion = router.query.region;
 
     return (
         <>
             <h1>Pokemon Information</h1>
-            <h1>Region: <a className='p-router'>{xregion}</a></h1>
             {pokemon.map((pokemons) => {
                 return (
                     <div key={pokemons._id}>
@@ -25,6 +21,7 @@ const Pokemon = ({ pokemon }) => {
                                     <li>{pokemons.abilities[1]}</li>
                                     <li>{pokemons.abilities[2]}</li>
                                 </ul>
+                        <h2>Region: {pokemons.region}</h2>
                     </div>
                 )
             })}

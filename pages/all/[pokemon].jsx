@@ -1,6 +1,6 @@
-import PokeModel from '../../../models/pokemon-model';
-import FormModel from '../../../models/otherForms-model';
-import dbConnect from '../../../database/database';
+import PokeModel from '../../models/pokemon-model';
+import FormModel from '../../models/otherForms-model';
+import dbConnect from '../../database/database';
 
 export default function AllPokemon({ pokeApi, pokeDB }) {
 
