@@ -28,7 +28,7 @@ const Type = ({ pokemon }) => {
                         return (
                         <div key={pokemons._id}>
                             
-                            <Link href="/pokeType/[type]/[pokemon]" as={`/pokeType/${xtype}/${pokemons.name}`}>
+                            <Link href="/pokeType/[type]/[pokemon]" as={`/pokeType/${xtype}/${pokemons.name.toLowerCase()}`}>
                                 <div className='button-pokemon bar_color'>
                                     <a className='a-pokemon-dnumber'>{pokemons.dexNumber}</a> <a className='a-pokemon-name'>{pokemons.name}</a>
                                     <img src={`/images/sprites2d/${lower}.png`}/>

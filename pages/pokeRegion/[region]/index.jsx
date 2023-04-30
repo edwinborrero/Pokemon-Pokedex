@@ -28,7 +28,7 @@ export default function PokemonRegionEntries({ pokemon }) {
                     return (
                         <div key={pokemons._id}>
                             
-                            <Link href="/pokeRegion/[region]/[pokemon]" as={`/pokeRegion/${xregion}/${pokemons.name}`}>
+                            <Link href="/pokeRegion/[region]/[pokemon]" as={`/pokeRegion/${xregion}/${pokemons.name.toLowerCase()}`}>
                                 <div className='button-pokemon bar_color'>
                                     <a className='a-pokemon-dnumber'>{pokemons.dexNumber}</a> <a className='a-pokemon-name'>{pokemons.name}</a>
                                     <img src={`/images/sprites2d/${lower}.png`}/>
