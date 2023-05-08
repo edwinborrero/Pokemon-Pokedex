@@ -34,9 +34,47 @@ export default function Pokemon({ pokeApi, pokeDB }) {
         let pokemon_type = document.getElementById("types");
 
         if (pokeApi.types.length == 1) {
-        pokemon_type.innerHTML = `Type: ${pokeApi.types[0].type.name}`;
-        } else {
-        pokemon_type.innerHTML = `Type: ${pokeApi.types[0].type.name}  ${pokeApi.types[1].type.name}`;
+            const typeDiv = document.createElement("div");
+            typeDiv.setAttribute("class", `type-icon icon-${pokeApi.types[0].type.name}`);
+      
+            const image = document.createElement("img");
+            image.setAttribute("src", `/images/icons/${pokeApi.types[0].type.name}.svg`);
+      
+            const typeName = document.createElement("a");
+            typeName.setAttribute("class", "type-name");
+            typeName.innerHTML = pokeApi.types[0].type.name;
+      
+            typeDiv.appendChild(image);
+            typeDiv.appendChild(typeName);
+            pokemon_type.appendChild(typeDiv);
+      
+          } else {
+            const typeDiv1 = document.createElement("div");
+            typeDiv1.setAttribute("class", `type-icon icon-${pokeApi.types[0].type.name}`);
+      
+            const typeDiv2 = document.createElement("div");
+            typeDiv2.setAttribute("class", `type-icon icon-${pokeApi.types[1].type.name}`);
+      
+            const image1 = document.createElement("img");
+            image1.setAttribute("src", `/images/icons/${pokeApi.types[0].type.name}.svg`);
+      
+            const image2 = document.createElement("img");
+            image2.setAttribute("src", `/images/icons/${pokeApi.types[1].type.name}.svg`);
+      
+            const typeName1 = document.createElement("a");
+            typeName1.setAttribute("class", "type-name");
+            typeName1.innerHTML = pokeApi.types[0].type.name;
+      
+            const typeName2 = document.createElement("a");
+            typeName2.setAttribute("class", "type-name");
+            typeName2.innerHTML = pokeApi.types[1].type.name;
+      
+            typeDiv1.appendChild(image1);
+            typeDiv1.appendChild(typeName1);
+            typeDiv2.appendChild(image2);
+            typeDiv2.appendChild(typeName2);
+            pokemon_type.appendChild(typeDiv1);
+            pokemon_type.appendChild(typeDiv2);
         }
 
     });
@@ -52,7 +90,8 @@ export default function Pokemon({ pokeApi, pokeDB }) {
                         <h2>Name: {pokemons.name}</h2>
                         <h2>Dex Number: {pokemons.dexNumber}</h2>
                         <h2>Species: {pokemons.species}</h2>
-                        <h2 id = "types"></h2>
+                        <h2>Type: </h2>
+                        <div id="types" className='wrapper-type'></div>
                         <h2>Height: {math_height}m</h2>
                         <h2>Weight: {math_weight}kg</h2>
                         <h2>Abilities: </h2>
