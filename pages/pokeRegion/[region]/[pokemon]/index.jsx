@@ -3,6 +3,8 @@ import FormModel from '../../../../models/otherForms-model';
 import dbConnect from '../../../../database/database';
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react';
+import { Button } from '@mui/material';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 export default function Pokemon({ pokeApi, pokeDB }) {
     const router = useRouter();
@@ -16,7 +18,14 @@ export default function Pokemon({ pokeApi, pokeDB }) {
     const pokeAbilities = [];
 
     for (let i=0; i < pokeApi.abilities.length; i++) {
-        pokeAbilities.push(pokeApi.abilities[i].ability.name);
+        
+        //Takes each name of an ability and capitalizes it. If the name has the special character "-", it replaces with empty space.
+        let re = /(\b[a-z](?!\s))/g;
+        const pa = pokeApi.abilities[i].ability.name;
+        const cap = pa.replace(re, function(x){return x.toUpperCase()});
+        const newA = cap.replace("-", " ");
+
+        pokeAbilities.push(newA);
     }
 
     useEffect(() => {
@@ -77,6 +86,21 @@ export default function Pokemon({ pokeApi, pokeDB }) {
             pokemon_type.appendChild(typeDiv2);
         }
 
+        const shiny_image = document.getElementById("imgClickAndChange");
+        const shiny_button = document.getElementById("shinyButton");
+        let toggle = true;
+
+        shiny_button.addEventListener('click', function(){
+            toggle = !toggle;
+            if(toggle){
+            shiny_image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`;
+            shiny_button.style.backgroundColor = "initial";
+            } else {
+            shiny_image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`;
+            shiny_button.style.backgroundColor = "#FFD700";
+            }
+        });
+
     });
 
     return (
@@ -106,8 +130,10 @@ export default function Pokemon({ pokeApi, pokeDB }) {
                             <li>Speed: {pokeApi.stats[5].base_stat}</li>
                             </ul>
                         <h2>Official Artwork: </h2>
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`}></img>
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokeApi.id}.png`}></img>
+                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`} id="imgClickAndChange"></img>
+                        <div>
+                            <Button variant="outlined" startIcon={<AutoAwesomeIcon/>} id="shinyButton">Shiny</Button>
+                        </div>
                     </div>
                 )
             })}
