@@ -4,6 +4,7 @@ import dbConnect from '../../database/database';
 import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import { Chart } from 'chart.js/auto';
 
 export default function AllPokemon({ pokeApi, pokeDB }) {
 
@@ -23,6 +24,52 @@ export default function AllPokemon({ pokeApi, pokeDB }) {
     const newA = cap.replace("-", " ");
 
     pokeAbilities.push(newA);
+  }
+
+  //Stores pokemons base stats in an array for easy access when charting.
+  const pokeStats = [];
+
+  for(let i=0; i < pokeApi.stats.length; i++) {
+    pokeStats.push(pokeApi.stats[i].base_stat);
+  }
+
+  //Swaps two specific base stats from the array above for charting in a specific way that is used commonly. 
+  function swapStats(arr, i1, i2) {
+    let temp = arr[i1];
+    arr[i1] = arr[i2];
+    arr[i2] = temp;
+  }
+
+  swapStats(pokeStats, 3, 5);
+
+  //Configuration of the radar chart to be created.
+  let chartId;
+
+  const configuration = {
+    type: 'radar',
+      data: {
+        labels: ["HP", "Atk", "Def", "Speed", "Sp. Def", "Sp. Atk"],
+        datasets: [{
+          label: "Stats",
+          data: pokeStats,
+          fill: true,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgb(255, 99, 132)',
+          pointBackgroundColor: 'rgb(255, 99, 132)',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(255, 99, 132)',
+          borderWidth: 3,
+        }],
+      },
+      options: {
+        responsive: false,
+        scales: {
+          r: {
+            min: 1,
+            max: 255,
+          }
+        },
+      }
   }
 
   useEffect(() => {
@@ -83,6 +130,7 @@ export default function AllPokemon({ pokeApi, pokeDB }) {
       pokemon_type.appendChild(typeDiv2);
     }
 
+    //Event listener for the shiny button. Changes the default pokemon image into the shiny pokemon image.
     const shiny_image = document.getElementById("imgClickAndChange");
     const shiny_button = document.getElementById("shinyButton");
     let toggle = true;
@@ -97,6 +145,13 @@ export default function AllPokemon({ pokeApi, pokeDB }) {
           shiny_button.style.backgroundColor = "#FFD700";
         }
     });
+
+    //Construction of the radar chart.
+    const rchrt = document.getElementById("chartId");
+    if(chartId){
+      chartId.destroy();
+    }
+    chartId = new Chart(rchrt, configuration);
 
   });
   
@@ -117,14 +172,7 @@ export default function AllPokemon({ pokeApi, pokeDB }) {
               <h2>Abilities: </h2>
                   <ul id="abilities_list"></ul>
               <h2>Base Stats: </h2>
-                  <ul>
-                    <li>HP: {pokeApi.stats[0].base_stat}</li>
-                    <li>Attack: {pokeApi.stats[1].base_stat}</li>
-                    <li>Defense: {pokeApi.stats[2].base_stat}</li>
-                    <li>Sp. Attack: {pokeApi.stats[3].base_stat}</li>
-                    <li>Sp. Defense: {pokeApi.stats[4].base_stat}</li>
-                    <li>Speed: {pokeApi.stats[5].base_stat}</li>
-                  </ul>
+                <canvas id="chartId" height="650" width="680"></canvas>
               <h2>Official Artwork: </h2>
                   <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeApi.id}.png`} id="imgClickAndChange"></img>
                   <div>
